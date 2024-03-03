@@ -10,7 +10,12 @@ import sys
 path = sys.argv[1]
 filenames = next(walk(path), (None, None, []))[2]  # [] if no file
 
-conf = Configuration(host="http://localhost:1865")
+try:
+    url=sys.argv[2]
+except Exception as e:
+    url="http://localhost:1865"
+
+conf = Configuration(host=url)
 
 # Enter a context with an instance of the API client
 with ApiClient(conf) as api_client:
